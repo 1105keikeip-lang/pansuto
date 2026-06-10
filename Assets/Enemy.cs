@@ -11,6 +11,10 @@ public class Enemy : MonoBehaviour
 
     SpriteRenderer sr;
     Color originalColor;
+
+    public GameObject breathPrefab;
+    public Transform breathPoint;
+    public int breathDamage = 20;
     void Start()
     {
         currentHP = maxHP;
@@ -56,19 +60,28 @@ public class Enemy : MonoBehaviour
     public int attackTurn = 3;
     int currentTurn = 0;
 
-    public void OnEnemyTurn()
+    public Breath OnEnemyTurn()
     {
         currentTurn++;
         if(currentTurn >= attackTurn)
         {
-            Attack();
             currentTurn = 0;
+            return Attack();
         }
+        return null;
     }
 
-    void Attack()
+    public Breath Attack()
     {
         Debug.Log("敵が攻撃！");
+
+        GameObject breathObj = Instantiate(breathPrefab, breathPoint.position, breathPoint.rotation);
+        Breath breath = breathObj.GetComponent<Breath>();
+        breath.transform.right = transform.right;
+
+        breath.damage = breathDamage;
+
+        return breath;
         //ダメージ処理などを後々追加
     }
 }

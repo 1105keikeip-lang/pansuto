@@ -89,4 +89,16 @@ public class Slingshot : MonoBehaviour
             rb.angularVelocity = 0f;
         }
     }
+    public int hp = 100;
+
+    public void TakeDamage(int dmg)
+    {
+        hp -= dmg;
+        Debug.Log("プレイヤーが " + dmg + " ダメージを受けた！");
+
+        if (hp <= 0)
+        {
+            Debug.Log("プレイヤーが倒れた！");
+        }
+    }
 }

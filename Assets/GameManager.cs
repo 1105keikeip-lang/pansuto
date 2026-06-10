@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,12 @@ public class GameManager : MonoBehaviour
 
     public List<Enemy> enemies = new List<Enemy>();
     public Slingshot player;
+
+    float stopTimer = 0f;
+    float stopThreshold = 0.2f;
+
+    public GameObject enemyTurnPanel;
+    public TMPro.TextMeshProUGUI turnText;
 
     public enum BattleState
     {
@@ -29,7 +36,17 @@ public class GameManager : MonoBehaviour
             // プレイヤーが動いている間は待つ
             if (player.IsStopped())
             {
-                EndPlayerTurn();
+                stopTimer += Time.deltaTime;
+
+                if(stopTimer >= stopThreshold)
+                {
+                    stopTimer = 0f;
+                    EndPlayerTurn();
+                }
+            }
+            else
+            {
+                stopTimer = 0f;
             }
         }
     }
@@ -37,19 +54,42 @@ public class GameManager : MonoBehaviour
     void EndPlayerTurn()
     {
         state = BattleState.EnemyTurn;
-        EnemyPhase();
+
+        turnText.text = "Enemy Turn";
+        enemyTurnPanel.SetActive(true);
+
+        StartCoroutine(EnemyPhaseCoroutine());
     }
 
-    void EnemyPhase()
+    IEnumerator EnemyPhaseCoroutine()
     {
-        foreach (var enemy in enemies)
+        yield return new WaitForSeconds(1f);
+        Breath lastBreath = null;
+
+        foreach (var enemy in new List<Enemy>(enemies))
         {
-            enemy.OnEnemyTurn();
+            if (enemy != null)
+            {
+                Breath b = enemy.OnEnemyTurn();
+                if(b != null)
+                {
+                    lastBreath = b;
+                }
+            }
+            
+        }
+
+        if(lastBreath != null)
+        {
+            yield return new WaitForSeconds(lastBreath.lifeTime);
         }
 
         // 敵のターンが終わったらプレイヤーへ
         state = BattleState.PlayerTurn;
         player.ResetTurn();
+
+        turnText.text = "Player Turn";
+        enemyTurnPanel.SetActive(false);
     }
 
     

@@ -461,6 +461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: []
   player: {fileID: 1204978930}
+  enemyTurnPanel: {fileID: 0}
+  turnText: {fileID: 0}
   state: 0
 --- !u!1 &519420028
 GameObject:
@@ -929,6 +931,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 50
   hpFill: {fileID: 486486831}
+  breathPrefab: {fileID: 0}
+  breathPoint: {fileID: 0}
+  breathDamage: 20
   attackTurn: 3
 --- !u!50 &822968476
 Rigidbody2D:
@@ -1214,6 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 927848946}
   arrowHead: {fileID: 927848946}
+  hp: 100
 --- !u!58 &1204978931
 CircleCollider2D:
   m_ObjectHideFlags: 0
