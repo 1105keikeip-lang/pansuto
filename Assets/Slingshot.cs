@@ -1,21 +1,34 @@
+using System.Collections;
 using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
     //public LineRenderer arrowLine;
     public GameObject arrow;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     Vector2 startPos;
+    private bool canControl = true;
+    private bool isShot = false;
+
+    SpriteRenderer sr;
+    Color originalColor;
+
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
         arrow.SetActive(false);
         //arrowLine.enabled = false;
     }
 
     void OnMouseDown()
     {
+        if (GameManager.Instance.state != GameManager.BattleState.PlayerTurn) return;
+        if (!canControl) return;
+
         startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         arrow.SetActive(true);
         //arrowLine.enabled = false;
@@ -24,6 +37,8 @@ public class Slingshot : MonoBehaviour
     public GameObject arrowHead;
     private void OnMouseDrag()
     {
+        if (GameManager.Instance.state != GameManager.BattleState.PlayerTurn) return;
+        if (!canControl) return;
         Vector2 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         float maxDistance = 1f;
@@ -54,11 +69,16 @@ public class Slingshot : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (GameManager.Instance.state != GameManager.BattleState.PlayerTurn) return;
+        if (!canControl) return;
         Vector2 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 force = (startPos - endPos) * 10f;
         rb.AddForce(force, ForceMode2D.Impulse);
 
         arrow.SetActive(false);
+
+        canControl = false;
+        isShot = true;
         //arrowLine.enabled = false;
     }
 
@@ -73,7 +93,7 @@ public class Slingshot : MonoBehaviour
 
     public bool IsStopped()
     {
-        return rb.linearVelocity.magnitude < 0.1f;
+        return rb.linearVelocity.magnitude < 0.05f;
     }
 
     public void ResetTurn()
@@ -87,18 +107,32 @@ public class Slingshot : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
+
+            if (isShot)
+            {
+                canControl = true;
+                isShot = false;
+            }
         }
     }
     public int hp = 100;
+    
 
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
         Debug.Log("プレイヤーが " + dmg + " ダメージを受けた！");
 
+        StartCoroutine(HitEffect());
         if (hp <= 0)
         {
             Debug.Log("プレイヤーが倒れた！");
         }
+    }
+    IEnumerator HitEffect()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sr.color = originalColor;
     }
 }

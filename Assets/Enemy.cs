@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour
 
         GameObject breathObj = Instantiate(breathPrefab, breathPoint.position, breathPoint.rotation);
         Breath breath = breathObj.GetComponent<Breath>();
+        breath.breathEffect = breathObj.GetComponentInChildren<ParticleSystem>();
         breath.transform.right = transform.right;
 
         breath.damage = breathDamage;

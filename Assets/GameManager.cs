@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject enemyTurnPanel;
     public TMPro.TextMeshProUGUI turnText;
 
+    bool playerHasMoved = false;
+   
     public enum BattleState
     {
         PlayerTurn,
@@ -33,17 +35,23 @@ public class GameManager : MonoBehaviour
     {
         if (state == BattleState.PlayerTurn)
         {
-            // プレイヤーが動いている間は待つ
-            if (player.IsStopped())
+            if(player.rb.linearVelocity.magnitude > 0.1f)
+            {
+                playerHasMoved = true;
+            }
+
+            if(playerHasMoved && player.IsStopped())
             {
                 stopTimer += Time.deltaTime;
-
                 if(stopTimer >= stopThreshold)
                 {
                     stopTimer = 0f;
+                    playerHasMoved = false;
                     EndPlayerTurn();
                 }
             }
+            // プレイヤーが動いている間は待つ
+            
             else
             {
                 stopTimer = 0f;
