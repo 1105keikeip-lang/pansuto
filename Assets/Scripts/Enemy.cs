@@ -53,6 +53,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        StageManager.Instance.OnEnemyKilled();
         // エフェクトや音を出すならここ
         Destroy(gameObject);
     }
@@ -85,4 +86,6 @@ public class Enemy : MonoBehaviour
         return breath;
         //ダメージ処理などを後々追加
     }
+
+    
 }

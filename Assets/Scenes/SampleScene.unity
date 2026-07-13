@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 112305570}
   - component: {fileID: 112305569}
   m_Layer: 0
-  m_Name: Copilot_20260713_113107_0
+  m_Name: stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
