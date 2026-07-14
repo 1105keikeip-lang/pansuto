@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        GameManager.Instance.enemies.Remove(this);
+
         StageManager.Instance.OnEnemyKilled();
         // エフェクトや音を出すならここ
         Destroy(gameObject);

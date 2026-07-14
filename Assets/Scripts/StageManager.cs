@@ -37,7 +37,7 @@ public class StageManager : MonoBehaviour
 
     public void OnEnemyKilled()
     {
-        if (GameManager.Instance.enemies.Count == 0)
+        if (GameManager.Instance.enemies.Count <= 0)
         {
             currentWave++;
 
