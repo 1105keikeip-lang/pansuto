@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fullScreenButton: {fileID: 405625874}
-  nextSceneName: GameScene
+  nextSceneName: HomeScene
 --- !u!114 &714672094
 MonoBehaviour:
   m_ObjectHideFlags: 0

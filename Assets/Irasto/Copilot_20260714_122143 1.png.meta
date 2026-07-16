@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Copilot_20260714_122143 1_0: -6187401754700784955
+      Copilot_20260714_122143 1_1: -6566658993308975898
+      Copilot_20260714_122143 1_2: -3247997991467011212
+      Copilot_20260714_122143 1_3: 6356737339395153567
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
