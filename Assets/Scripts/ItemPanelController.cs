@@ -23,6 +23,8 @@ public class ItemPanelController : MonoBehaviour
         equipPanel.SetActive(true);
         itemListPanel.SetActive(false);
         forgePanel.SetActive(false);
+
+        HideAllButtons();
     }
 
     public void ShowItem()
@@ -30,6 +32,8 @@ public class ItemPanelController : MonoBehaviour
         equipPanel.SetActive(false);
         itemListPanel.SetActive(true);
         forgePanel.SetActive(false);
+
+        HideAllButtons();
     }
 
     public void ShowForge()
@@ -37,5 +41,7 @@ public class ItemPanelController : MonoBehaviour
         equipPanel.SetActive(false);
         itemListPanel.SetActive(false);
         forgePanel.SetActive(true);
+
+        HideAllButtons();
     }
 }

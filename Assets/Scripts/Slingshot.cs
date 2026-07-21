@@ -115,16 +115,16 @@ public class Slingshot : MonoBehaviour
             }
         }
     }
-    public int hp = 100;
+    public int HP = 100;
     
 
     public void TakeDamage(int dmg)
     {
-        hp -= dmg;
+        HP -= dmg;
         Debug.Log("プレイヤーが " + dmg + " ダメージを受けた！");
 
         StartCoroutine(HitEffect());
-        if (hp <= 0)
+        if (HP <= 0)
         {
             Debug.Log("プレイヤーが倒れた！");
         }
