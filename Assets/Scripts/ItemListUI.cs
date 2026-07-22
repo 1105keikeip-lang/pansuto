@@ -1,13 +1,19 @@
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class ItemListUI : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Transform content;
     public GameObject itemPrefab;
 
-     void OnEnable()
+     public void UpdateList()
     {
+        
+
+        Debug.Log("content = " + content);
+        Debug.Log("itemPrefab = " + itemPrefab);
+        Debug.Log("Inventory count = " + InventoryManager.Instance.items.Count);
         foreach (Transform child in content)
             Destroy(child.gameObject);
 
@@ -20,12 +26,19 @@ public class ItemListUI : MonoBehaviour
             obj.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = item.itemName;
             obj.transform.Find("Count").GetComponent<TMPro.TextMeshProUGUI>().text = "Å~" + count;
             obj.transform.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = item.icon;
+            
 
-            obj.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+            obj.transform.Find("UseButton").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
             {
                 InventoryManager.Instance.UseItem(item);
-                OnEnable(); // çƒï`âÊ
+                UpdateList();//égópå„Ç…çXêV
             });
+            Debug.Log("Name = " + obj.transform.Find("Name"));
+            Debug.Log("Count = " + obj.transform.Find("Count"));
+            Debug.Log("Icon = " + obj.transform.Find("Icon"));
+            Debug.Log("UseButton = " + obj.transform.Find("UseButton"));
         }
     }
+
+   
 }

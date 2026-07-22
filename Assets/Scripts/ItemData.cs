@@ -9,7 +9,8 @@ public enum ItemType
     Important
 }
 
-[CreateAssetMenu(fileName = "ItemData",menuName ="Game/Item")]
+[CreateAssetMenu(fileName = "ItemData", menuName = "Game/Item")]
+
 
 public class ItemData : ScriptableObject
 {
@@ -25,3 +26,7 @@ public class ItemData : ScriptableObject
     // Update is called once per frame
     
 }
+
+
+
+

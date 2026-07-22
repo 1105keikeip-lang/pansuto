@@ -9,6 +9,7 @@ public class ItemPanelController : MonoBehaviour
     public GameObject forgePanel;
 
     public GameObject[] itemButtons;
+    public ItemListUI itemListUI;
 
     void HideAllButtons()
     {
@@ -26,14 +27,17 @@ public class ItemPanelController : MonoBehaviour
 
         HideAllButtons();
     }
-
+    
     public void ShowItem()
     {
+
         equipPanel.SetActive(false);
         itemListPanel.SetActive(true);
         forgePanel.SetActive(false);
 
         HideAllButtons();
+
+        itemListUI.UpdateList();
     }
 
     public void ShowForge()

@@ -5,10 +5,17 @@ public class InventoryManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static InventoryManager Instance;
+    public ItemData[] startItems;
 
+     
     void Awake()
     {
         Instance = this;
+    }
+    void Start()
+    {
+        foreach (var item in startItems)
+            InventoryManager.Instance.AddItem(item, 1);
     }
 
     public Dictionary<ItemData, int> items = new Dictionary<ItemData, int>();
