@@ -2847,7 +2847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &974194538
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4153,7 +4153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 1327411093}
-  itemPrefab: {fileID: 6498488313930649864, guid: 36b377547fc781e4bb6d9ce237094203, type: 3}
+  itemPrefab: {fileID: 1474977653}
 --- !u!114 &1327411095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4298,6 +4298,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1474977653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6498488313930649864, guid: 36b377547fc781e4bb6d9ce237094203, type: 3}
+  m_PrefabInstance: {fileID: 1219447609555809911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1486214806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4539,7 +4544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1516917463
 RectTransform:
   m_ObjectHideFlags: 0
